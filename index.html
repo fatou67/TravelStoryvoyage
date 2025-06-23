@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <!-- CDN Tailwind CSS TEMPORAIRE -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#05B6D3",
+              secondary: "#Ef863E",
+            },
+            fontFamily: {
+              poppins: ["Poppins", "sans-serif"],
+            },
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="font-poppins">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
