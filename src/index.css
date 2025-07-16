@@ -1,36 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import "tailwindcss";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.rdp-root{
+  --rdp-accent-color: #FF69B4;
+  --rdp-accent-background-color: #dffbff;
+  --rdp-day_button-border-raduis: 8px;
+  --rdp-selected-font: bold medium var(--rdp-font-family);
+}
+
 @layer base {
-  html{
+  html {
     font-family: "poppins", "sans-serif";
   }
-  body{
-    background-color:#fdfeff ;
+  body {
+    background-color: #fdfeff;
     overflow-y: hidden;
   }
+}
+
+/* Gestion scrollbar styles*/
+.scollBar::-webkit-scrollbar{
+  width: 10px;
+  height: 3px;
 
 }
+
+
+.scollBar::-webkit-scrollbar-thumb{
+  background-color: #057c8e;
+  border-radius: 3px;
+}
+.scollBar::-webkit-scrollbar-track{
+  background-color: rgb(172, 201, 229);
+
+}
+
+
 @layer components {
-  .input-box{
+  .input-box {
     @apply w-full text-sm bg-cyan-600/5 rounded px-5 py-3 mb-4 outline-none;
   }
+
   .btn-primary {
-     @apply w-full text-sm font-medium text-white bg-cyan-500 shadow-lg shawdon-cyan-200;
+    @apply w-full text-sm font-medium text-white bg-cyan-500 shadow-lg shadow-cyan-200;
+  }
 
-    }
-    .btn-ligt {
-       @apply bg-cyan-50 text-primary shadow-cyan-100/10 border-cyan-100 hover: shadow-lg
+  .btn-light {
+    @apply bg-cyan-50 text-primary shadow-cyan-100/10 border border-cyan-100 hover:shadow-lg;
+  }
 
-      }
-      .login-ui-box {
-        @apply w-80 h-[450] bg-primary absolute rotate-45
+  .login-ui-box {
+    @apply w-80 h-[450px] bg-primary absolute rotate-45;
+  }
 
-      }
-    
+  .model-box {
+  @apply text-[22px] text-slate-300 cursor-pointer hover:text-red-500;
+}
+.icon-btn{
+   @apply text-[22px]  text-slate-300 cursor-pointer hover:text-red-500;
+}
+
+.input-label{
+   @apply text-xs text-slate-400;
+}
+.btn-small{
+   @apply flex items-center gap-3 text-xs font-meduim bg-cyan-50 text-primary shadow-cyan-100/0 border-cyan-100 hover: bg-primary hover:text-white;
+}
+
+.btn-delete{
+   @apply bg-rose-50 text-rose-500 shadow-rose-100/0 border border-rose -100 hover:bg-rose-500 hover:text-white;
 
 }
+
+}
+
+

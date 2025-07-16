@@ -1,18 +1,21 @@
 import React from 'react';
-import ProfileInfo from './Cards/ProfileInfo';
-import LOGO from '../assets/images/logo.jpg';
-
+import LOGO from "../assets/logo.avif";
+import ProfileInfo from "./Cards/ProfileInfo"; 
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ userInfo }) => {
-  return (
-    <div className="bg-white flex items-center justify-between px-6 py-3 drop-shadow sticky top-0 z-10">
-      <img
-        src={LOGO}
-        alt="Travel Story"
-        className="h-14 w-auto" />
+  const isToken = localStorage.getItem('accessToken');
+  const navigate = useNavigate();
 
-       <ProfileInfo userInfo={userInfo} />
-     
+  const onLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
+  return (
+    <div className='bg-white flex items-center justify-between px-6 py-2 drop-shadow sticky top-0 z-10'>
+      <img src={LOGO} alt="travel story" className="h-9" />
+      {isToken && <ProfileInfo userInfo={userInfo} onLogout={onLogout} />}
     </div>
   );
 };

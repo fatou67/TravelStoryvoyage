@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import PasswordInput from '../../components/input/PasswordInput';
-import loginImage from '../../assets/images/bg-images.png';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
+
+  const loginImage = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,86 +25,72 @@ const Login = () => {
         localStorage.setItem('accessToken', response.data.accessToken);
         navigate('/dashboard');
       } else {
-        setError("Réponse inattendue du serveur");
+        setError("Unexpected server response");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Email ou mot de passe incorrect");
-      console.error('Erreur:', err.response?.data || err);
+      setError(err.response?.data?.message || "Incorrect email or password");
+      console.error('Error:', err.response?.data || err);
     }
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-cyan-50 font-poppins">
-      <div className="flex flex-col md:flex-row w-full max-w-6xl bg-white rounded-lg shadow-sm overflow-hidden h-[80vh]">
-        {/* Partie image */}
-        <div className="md:w-1/2 relative bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-sky-50 p-4"> {/* Bleu ciel clair */}
+      <div className="flex flex-col md:flex-row w-full max-w-md bg-white rounded-lg shadow-sm overflow-hidden">
+        {/* Photo à côté du formulaire (sur desktop) */}
+        <div className="hidden md:block md:w-2/5 bg-gray-900">
           <img
             src={loginImage}
-            alt="Travel scenery"
-            className="w-full h-full object-cover opacity-80"
+            alt="Travel"
+            className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-            <h2 className="text-3xl font-light mb-2">Capture Your Journeys</h2>
-            <p className="text-gray-300 font-light text-sm">
-              Record your travel experiences and memories in your personal travel journal.
-            </p>
-            <div className="mt-4 text-xs text-gray-400">
-              0:57 / 1:85:25 • Login screen UI
-            </div>
-          </div>
         </div>
 
-        {/* Partie formulaire */}
-        <div className="md:w-1/2 p-10 flex items-center justify-center bg-white">
-          <div className="w-full max-w-xs">
-            <h1 className="text-2xl font-light text-gray-800 mb-8 text-center">Login</h1>
-            <form onSubmit={handleLogin} className="space-y-6">
-              {/* Email */}
-              <div className="border-b border-gray-300 pb-1">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                  className="w-full bg-transparent py-2 text-sm text-gray-800 focus:outline-none placeholder-gray-400"
-                  required
-                />
-              </div>
-
-              {/* Password */}
-              <PasswordInput
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
+        {/* Formulaire compact */}
+        <div className="w-full md:w-3/5 p-5">
+          <h1 className="text-lg font-normal text-gray-800 mb-4 text-center">Login</h1>
+          
+          <form onSubmit={handleLogin} className="space-y-3">
+            <div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                className="w-full px-3 py-2 text-xs border border-gray-200 rounded focus:outline-none focus:border-cyan-400"
+                required
               />
+            </div>
 
-              {/* Bouton Login */}
-              <button
-                type="submit"
-                className="w-full bg-cyan-600 text-white py-3 text-sm rounded hover:bg-cyan-700 transition-colors mt-4"
-              >
-                LOGIN
-              </button>
+            <PasswordInput
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="w-full px-3 py-2 text-xs border border-gray-200 rounded focus:outline-none focus:border-cyan-400"
+            />
 
-              {/* Message d'erreur */}
-              {error && (
-                <div className="text-red-500 text-center text-sm mt-2">
-                  {error}
-                </div>
-              )}
+            <button
+              type="submit"
+              className="w-full bg-cyan-500 text-white py-2 text-xs rounded hover:bg-cyan-600 mt-3"
+            >
+              LOGIN
+            </button>
 
-              {/* Lien vers création de compte */}
-              <div className="text-center pt-2">
-                <button
-                  type="button"
-                  onClick={() => navigate('/signup')}
-                  className="text-cyan-600 hover:text-cyan-800 text-xs font-medium underline hover:no-underline"
-                >
-                  CREATE ACCOUNT
-                </button>
+            {error && (
+              <div className="text-red-500 text-xs text-center mt-2">
+                {error}
               </div>
-            </form>
-          </div>
+            )}
+
+            <div className="text-center pt-2">
+              <button
+                type="button"
+                onClick={() => navigate('/signup')}
+                className="text-cyan-600 hover:text-cyan-800 text-xs"
+              >
+                CREATE ACCOUNT
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
